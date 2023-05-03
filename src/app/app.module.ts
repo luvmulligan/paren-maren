@@ -4,13 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DiceComponent } from './dice/dice.component';
 import { DiceModule } from './dice/dice.module';
-import { CommonModule, FormStyle } from '@angular/common';
+import { CommonModule, FormStyle, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, DiceModule, FormsModule, CommonModule],
-  providers: [],
+  providers: [JsonPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

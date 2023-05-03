@@ -305,7 +305,7 @@
     alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
   />
-  <span>Welcome</span>
+  <span>Score: </span>
   <h1>{{ score }}</h1>
   <div class="spacer"></div>
   <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
@@ -319,49 +319,87 @@
   </a>
 </div>
 
-<div class="content" role="main">
-  <div id="roll" class="roll-button" (click)="rollDice()"><button>Roll dice!</button></div>
-
-  <span style="padding-top: 3rem">
-    <div class="dice">
-      <img *ngIf="rollResult === 1" src="assets/dice1.png" />
-      <img *ngIf="rollResult === 2" src="assets/dice2.png" />
-      <img *ngIf="rollResult === 3" src="assets/dice3.png" />
-      <img *ngIf="rollResult === 4" src="assets/dice4.png" />
-      <img *ngIf="rollResult === 5" src="assets/dice5.png" />
-      <img *ngIf="rollResult === 6" src="assets/dice6.png" /></div
-  ></span>
-
-  <span>
-    <div class="dice2">
-      <img *ngIf="rollResult2 === 1" src="assets/dice1.png" />
-      <img *ngIf="rollResult2 === 2" src="assets/dice2.png" />
-      <img *ngIf="rollResult2 === 3" src="assets/dice3.png" />
-      <img *ngIf="rollResult2 === 4" src="assets/dice4.png" />
-      <img *ngIf="rollResult2 === 5" src="assets/dice5.png" />
-      <img *ngIf="rollResult2 === 6" src="assets/dice6.png" /></div
-  ></span>
-
-  <span>
-    <div class="dice3">
-      <img *ngIf="rollResult3 === 1" src="assets/dice1.png" />
-      <img *ngIf="rollResult3 === 2" src="assets/dice2.png" />
-      <img *ngIf="rollResult3 === 3" src="assets/dice3.png" />
-      <img *ngIf="rollResult3 === 4" src="assets/dice4.png" />
-      <img *ngIf="rollResult3 === 5" src="assets/dice5.png" />
-      <img *ngIf="rollResult3 === 6" src="assets/dice6.png" /></div
-  ></span>
-
-  <span>
-    <div class="dice4">
-      <img *ngIf="rollResult4 === 1" src="assets/dice1.png" />
-      <img *ngIf="rollResult4 === 2" src="assets/dice2.png" />
-      <img *ngIf="rollResult4 === 3" src="assets/dice3.png" />
-      <img *ngIf="rollResult4 === 4" src="assets/dice4.png" />
-      <img *ngIf="rollResult4 === 5" src="assets/dice5.png" />
-      <img *ngIf="rollResult4 === 6" src="assets/dice6.png" /></div
-  ></span>
-
+<div class="container content" role="main">
+  <div class="row">
+    <div class="col" *ngFor="let player of players">
+      <div>{{ player.name }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div id="roll" class="roll-button" (click)="newPlayer()">
+        <button type="button" class="btn btn-light">Add Player</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div id="roll" class="roll-button" (click)="switchTurn()">
+        <button type="button" class="btn btn-light">Roll dice 1!</button>
+      </div>
+    </div>
+    <div class="col" *ngIf="rollResult >= 4">
+      <div id="roll" class="roll-button" (click)="rollDice2()">
+        <button type="button" class="btn btn-light">Roll dice 2!</button>
+      </div>
+    </div>
+    <div class="col" *ngIf="rollResult2 >= 4">
+      <div id="roll" class="roll-button" (click)="rollDice3()">
+        <button type="button" class="btn btn-light">Roll dice 3!</button>
+      </div>
+    </div>
+    <div class="col" *ngIf="rollResult3 >= 4">
+      <div id="roll" class="roll-button" (click)="rollDice4()">
+        <button type="button" class="btn btn-light">Roll dice 4!</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <span style="padding-top: 1rem">
+        <div class="dice">
+          <img *ngIf="rollResult === 1" src="assets/dice1.png" />
+          <img *ngIf="rollResult === 2" src="assets/dice2.png" />
+          <img *ngIf="rollResult === 3" src="assets/dice3.png" />
+          <img *ngIf="rollResult === 4" src="assets/dice4.png" />
+          <img *ngIf="rollResult === 5" src="assets/dice5.png" />
+          <img *ngIf="rollResult === 6" src="assets/dice6.png" /></div
+      ></span>
+    </div>
+    <div class="col">
+      <span>
+        <div class="dice2">
+          <img *ngIf="rollResult2 === 1" src="assets/dice1.png" />
+          <img *ngIf="rollResult2 === 2" src="assets/dice2.png" />
+          <img *ngIf="rollResult2 === 3" src="assets/dice3.png" />
+          <img *ngIf="rollResult2 === 4" src="assets/dice4.png" />
+          <img *ngIf="rollResult2 === 5" src="assets/dice5.png" />
+          <img *ngIf="rollResult2 === 6" src="assets/dice6.png" /></div
+      ></span>
+    </div>
+    <div class="col">
+      <span>
+        <div class="dice3">
+          <img *ngIf="rollResult3 === 1" src="assets/dice1.png" />
+          <img *ngIf="rollResult3 === 2" src="assets/dice2.png" />
+          <img *ngIf="rollResult3 === 3" src="assets/dice3.png" />
+          <img *ngIf="rollResult3 === 4" src="assets/dice4.png" />
+          <img *ngIf="rollResult3 === 5" src="assets/dice5.png" />
+          <img *ngIf="rollResult3 === 6" src="assets/dice6.png" /></div
+      ></span>
+    </div>
+    <div class="col">
+      <span>
+        <div class="dice4">
+          <img *ngIf="rollResult4 === 1" src="assets/dice1.png" />
+          <img *ngIf="rollResult4 === 2" src="assets/dice2.png" />
+          <img *ngIf="rollResult4 === 3" src="assets/dice3.png" />
+          <img *ngIf="rollResult4 === 4" src="assets/dice4.png" />
+          <img *ngIf="rollResult4 === 5" src="assets/dice5.png" />
+          <img *ngIf="rollResult4 === 6" src="assets/dice6.png" /></div
+      ></span>
+    </div>
+  </div>
   <!-- Footer -->
 
   <svg
