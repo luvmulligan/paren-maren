@@ -1,3 +1,4 @@
+import { CursorError } from '@angular/compiler/src/ml_parser/lexer';
 import { Component, OnInit } from '@angular/core';
 
 export class Player {
@@ -11,36 +12,40 @@ export class Player {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'paren-maren';
+export class AppComponent {
+  title = 'Paren Maren';
   canRoll: boolean = true;
+  canParenMaren: boolean = false;
+  blackDiceRolled: boolean = false;
   gameBoard = {
     players: [],
     currentTurn: 0,
     lastTurn: 1
   };
-  score: number = 0;
-  rollResult = 0;
   turnDices = [];
   currentPlayer;
   diceAudio;
-  lastPlayer;
-
-  ngOnInit() {}
+  blackDice = 1;
 
   switchTurn() {
     this.canRoll = true;
-    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn];
-    this.lastPlayer = this.gameBoard.players[this.gameBoard.lastTurn].score;
-    console.log(this.lastPlayer);
-    if (this.lastPlayer) {
-      this.currentPlayer.score = this.score - this.lastPlayer;
+    this.canParenMaren = false;
+    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn].score;
+    let total: number = 0;
+    let currentScore: number = this.currentPlayer;
+    this.turnDices.forEach((item) => {
+      total += item.rollResult;
+    });
+    let multipliedScore: number = total * this.blackDice;
+    if (currentScore === undefined) {
+      this.gameBoard.players[this.gameBoard.currentTurn].score = multipliedScore;
     } else {
-      this.currentPlayer.score = this.score;
+      this.gameBoard.players[this.gameBoard.currentTurn].score = currentScore + multipliedScore;
     }
 
     localStorage.setItem('Game', JSON.stringify(this.gameBoard));
     this.turnDices = [];
+    this.blackDiceRolled = false;
     this.gameBoard.currentTurn = (this.gameBoard.currentTurn + 1) % this.gameBoard.players.length;
     this.gameBoard.lastTurn = (this.gameBoard.lastTurn + 1) % this.gameBoard.players.length;
   }
@@ -52,28 +57,37 @@ export class AppComponent implements OnInit {
   }
 
   rollDice() {
+    this.blackDice = 1;
+    this.blackDiceRolled = false;
     this.playSound();
-    this.rollResult = 0;
     this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn];
-
-    if (this.turnDices.length === 4) {
+    if (this.turnDices.length === 4 || this.gameBoard.players.length === 0) {
       return;
     } else {
       let rollDice = Math.floor(Math.random() * (6 - 1) + 1);
-      this.rollResult = rollDice;
-      let x = this.score + rollDice;
-      this.score = x;
-      this.turnDices.push({ id: 1, rollResult: rollDice });
+      this.turnDices.push({ rollResult: rollDice });
+
       if (rollDice >= 4) {
+        this.canParenMaren = true;
         this.canRoll = true;
       }
       if (rollDice < 4 || this.turnDices.length === 4) {
+        this.canParenMaren = false;
         this.canRoll = false;
         setTimeout(() => {
           this.switchTurn();
         }, 2000);
       }
     }
+  }
+
+  rollBlackDice() {
+    this.playSound();
+    this.blackDiceRolled = true;
+    this.blackDice = Math.floor(Math.random() * (6 - 1) + 1);
+    setTimeout(() => {
+      this.switchTurn();
+    }, 2000);
   }
 
   newPlayer() {
