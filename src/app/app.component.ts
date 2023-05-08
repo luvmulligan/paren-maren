@@ -1,5 +1,4 @@
-import { CursorError } from '@angular/compiler/src/ml_parser/lexer';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 export class Player {
   id: number;
