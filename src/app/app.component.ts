@@ -63,7 +63,7 @@ export class AppComponent {
     if (this.turnDices.length === 4 || this.gameBoard.players.length === 0) {
       return;
     } else {
-      let rollDice = Math.floor(Math.random() * (6 - 1) + 1);
+      let rollDice = Math.floor(Math.random() * (6 - 1 + 1) + 1);
       this.turnDices.push({ rollResult: rollDice });
 
       if (rollDice >= 4) {
@@ -83,7 +83,7 @@ export class AppComponent {
   rollBlackDice() {
     this.playSound();
     this.blackDiceRolled = true;
-    this.blackDice = Math.floor(Math.random() * (6 - 1) + 1);
+    this.blackDice = Math.floor(Math.random() * (6 - 1 + 1) + 1);
     setTimeout(() => {
       this.switchTurn();
     }, 2000);
