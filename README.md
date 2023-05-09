@@ -29,3 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # paren-maren
 
 Juego de dados creado por Cob Cris.
+https://twitter.com/cobcris
