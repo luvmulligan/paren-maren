@@ -193,8 +193,8 @@ function AppComponent_div_19_Template(rf, ctx) { if (rf & 1) {
 function AppComponent_div_23_Template(rf, ctx) { if (rf & 1) {
     const _r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 51);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AppComponent_div_23_Template_div_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r26.newPlayer(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 52);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AppComponent_div_23_Template_button_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r26.newPlayer(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Add Player");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -225,9 +225,9 @@ function AppComponent_div_24_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](6, _c0, ctx_r5.currentPlayer === player_r28.name));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](player_r28.name ? player_r28.name : "anonymous");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](player_r28.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("type", player_r28.score < 300 ? "info" : "warning");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("type", player_r28.score <= 300 ? "info" : "warning");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", player_r28.score)("max", 365);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](player_r28.score);
@@ -321,14 +321,19 @@ class AppComponent {
     }
     newPlayer() {
         let newPlayer = new Player();
-        newPlayer.name = prompt('');
-        this.gameBoard.players.push(newPlayer);
-        newPlayer.id = this.gameBoard.players.length;
-        localStorage.setItem('Game', JSON.stringify(this.gameBoard));
+        newPlayer.name = prompt();
+        if (newPlayer.name === '' || newPlayer.name === null || newPlayer.name === 'null') {
+            return;
+        }
+        else {
+            this.gameBoard.players.push(newPlayer);
+            newPlayer.id = this.gameBoard.players.length;
+            localStorage.setItem('Game', JSON.stringify(this.gameBoard));
+        }
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 25, vars: 6, consts: [["id", "dice-audio"], ["src", "assets/dice.mp3", "type", "audio/mp3"], ["role", "banner"], [1, "spacer"], ["role", "main", 1, "container", "content"], [1, "row", "text-center"], [1, "col", "text-center"], [1, "row", "pb-3", "pt-3", "mt-5", 2, "height", "160px"], [1, "col-12"], ["id", "roll", "class", "roll-button", 4, "ngIf"], ["class", "col text-center", 4, "ngFor", "ngForOf"], [1, "row", "pb-3", "pt-3", "text-center"], [1, "col-12", "text-center", 2, "height", "160px"], ["class", "dice", 4, "ngIf"], [1, "row"], [1, "col-12", "text-center"], ["class", "row", 4, "ngIf"], [1, "col-12", 2, "padding-bottom", "4rem"], ["id", "roll", "class", "col roll-button", 3, "click", 4, "ngIf"], ["class", "row text-center", 4, "ngFor", "ngForOf"], ["id", "roll", 1, "roll-button"], ["type", "button", 1, "btn", "btn-light", "button-70", 3, "disabled", "click"], [1, "dice"], ["src", "assets/dice1.png", 4, "ngIf"], ["src", "assets/dice2.png", 4, "ngIf"], ["src", "assets/dice3.png", 4, "ngIf"], ["src", "assets/dice4.png", 4, "ngIf"], ["src", "assets/dice5.png", 4, "ngIf"], ["src", "assets/dice6.png", 4, "ngIf"], ["src", "assets/dice1.png"], ["src", "assets/dice2.png"], ["src", "assets/dice3.png"], ["src", "assets/dice4.png"], ["src", "assets/dice5.png"], ["src", "assets/dice6.png"], ["src", "assets/black-dice-1.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-2.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-3.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-4.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-5.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-6.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-1.png", 2, "max-width", "100px"], ["src", "assets/black-dice-2.png", 2, "max-width", "100px"], ["src", "assets/black-dice-3.png", 2, "max-width", "100px"], ["src", "assets/black-dice-4.png", 2, "max-width", "100px"], ["src", "assets/black-dice-5.png", 2, "max-width", "100px"], ["src", "assets/black-dice-6.png", 2, "max-width", "100px"], [1, "col", "text-right", 2, "padding-left", "6.5rem"], [1, "col"], ["type", "button", "class", "btn btn-light btn-circle btn-xl button-62", 3, "click", 4, "ngIf"], ["type", "button", 1, "btn", "btn-light", "btn-circle", "btn-xl", "button-62", 3, "click"], ["id", "roll", 1, "col", "roll-button", 3, "click"], ["type", "button", 1, "btn", "btn-light", "button-70"], [1, "col", 2, "margin-bottom", "10px"], [1, "col-2", 3, "ngClass"], [1, "col-10"], [3, "type", "value", "max"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 25, vars: 6, consts: [["id", "dice-audio"], ["src", "assets/dice.mp3", "type", "audio/mp3"], ["role", "banner"], [1, "spacer"], ["role", "main", 1, "container", "content"], [1, "row", "text-center"], [1, "col", "text-center"], [1, "row", "pb-3", "pt-3", "mt-5", 2, "height", "160px"], [1, "col-12"], ["id", "roll", "class", "roll-button", 4, "ngIf"], ["class", "col text-center", 4, "ngFor", "ngForOf"], [1, "row", "pb-3", "pt-3", "text-center"], [1, "col-12", "text-center", 2, "height", "160px"], ["class", "dice", 4, "ngIf"], [1, "row"], [1, "col-12", "text-center"], ["class", "row", 4, "ngIf"], [1, "col-12", 2, "padding-bottom", "4rem"], ["id", "roll", "class", "col roll-button", 4, "ngIf"], ["class", "row text-center", 4, "ngFor", "ngForOf"], ["id", "roll", 1, "roll-button"], ["type", "button", 1, "btn", "btn-light", "button-70", 3, "disabled", "click"], [1, "dice"], ["src", "assets/dice1.png", 4, "ngIf"], ["src", "assets/dice2.png", 4, "ngIf"], ["src", "assets/dice3.png", 4, "ngIf"], ["src", "assets/dice4.png", 4, "ngIf"], ["src", "assets/dice5.png", 4, "ngIf"], ["src", "assets/dice6.png", 4, "ngIf"], ["src", "assets/dice1.png"], ["src", "assets/dice2.png"], ["src", "assets/dice3.png"], ["src", "assets/dice4.png"], ["src", "assets/dice5.png"], ["src", "assets/dice6.png"], ["src", "assets/black-dice-1.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-2.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-3.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-4.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-5.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-6.png", "style", "max-width: 100px", 4, "ngIf"], ["src", "assets/black-dice-1.png", 2, "max-width", "100px"], ["src", "assets/black-dice-2.png", 2, "max-width", "100px"], ["src", "assets/black-dice-3.png", 2, "max-width", "100px"], ["src", "assets/black-dice-4.png", 2, "max-width", "100px"], ["src", "assets/black-dice-5.png", 2, "max-width", "100px"], ["src", "assets/black-dice-6.png", 2, "max-width", "100px"], [1, "col", "text-right", 2, "padding-left", "6.5rem"], [1, "col"], ["type", "button", "class", "btn btn-light btn-circle btn-xl button-62", 3, "click", 4, "ngIf"], ["type", "button", 1, "btn", "btn-light", "btn-circle", "btn-xl", "button-62", 3, "click"], ["id", "roll", 1, "col", "roll-button"], ["type", "button", 1, "btn", "btn-light", "button-70", 3, "click"], [1, "col", 2, "margin-bottom", "10px"], [1, "col-2", 3, "ngClass"], [1, "col-10"], [3, "type", "value", "max"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "audio", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "source", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
