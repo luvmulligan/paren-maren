@@ -16,6 +16,7 @@ export class AppComponent {
   canRoll: boolean = true;
   canParenMaren: boolean = false;
   blackDiceRolled: boolean = false;
+  startGamePressed: boolean = false;
   gameBoard = {
     players: [],
     currentTurn: 0,
@@ -25,6 +26,10 @@ export class AppComponent {
   currentPlayer;
   diceAudio;
   blackDice = 1;
+
+  startGame() {
+    this.startGamePressed = true;
+  }
 
   switchTurn() {
     this.canRoll = true;

@@ -1,27 +1,24 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style></style>
 <audio id="dice-audio">
   <source src="assets/dice.mp3" type="audio/mp3" />
 </audio>
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
+<div role="banner">
   <div class="spacer"></div>
 </div>
 
 <div class="container content" role="main">
   <h1>Paren Maren</h1>
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8 text-center">
+  <div class="row text-center">
+    <!-- <div class="col-2"></div> -->
+    <div class="col text-center">
       <div class="row pb-3 pt-3 mt-5" style="height: 160px">
+        <div class="col-12">
+          <div id="roll" class="roll-button" *ngIf="gameBoard.players.length !== 0 && startGamePressed === false">
+            <button type="button" class="btn btn-light button-70" (click)="startGame()" [disabled]="canRoll === false">
+              Start Game
+            </button>
+          </div>
+        </div>
         <div class="col text-center" *ngFor="let dice of turnDices">
           <span>
             <div class="dice">
@@ -49,43 +46,65 @@
         </div>
       </div>
     </div>
-    <div class="col-2">
-      <div class="row">
-        <div id="roll" style="text-align: center" class="col roll-button" (click)="newPlayer()">
-          <button type="button" class="btn btn-light">Add Player</button>
-        </div>
-      </div>
-      <div class="row pt-2 text-center">
-        <div class="col" *ngFor="let player of gameBoard.players">
-          <div class="col-12">
-            <h4>{{ player.name ? player.name : 'anonymous' }}</h4>
-          </div>
-          <div class="col-12">
-            <h4>{{ player.score ? player.score : ' ' }}</h4>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="row">
-    <div class="row text-center">
-      <div class="col-12">
-        <div id="roll" class="roll-button">
-          <button type="button" class="btn btn-light" (click)="rollDice()" [disabled]="canRoll === false">Roll!</button>
+    <div class="col-12 text-center">
+      <div class="row" *ngIf="startGamePressed === true">
+        <div class="col text-right" style="padding-left: 6.5rem">
+          <div id="roll" class="roll-button">
+            <button type="button" class="btn btn-light button-70" (click)="rollDice()" [disabled]="canRoll === false">
+              Roll!
+            </button>
+          </div>
+        </div>
+        <div class="col">
+          <div id="roll" class="roll-button">
+            <button
+              type="button"
+              class="btn btn-light btn-circle btn-xl button-62"
+              (click)="rollBlackDice()"
+              *ngIf="canParenMaren === true"
+            >
+              Paren Maren!
+            </button>
+          </div>
         </div>
       </div>
-      <div class="col-12">
-        <div id="roll" class="roll-button">
-          <button type="button" class="btn btn-light mt-2" (click)="rollBlackDice()" *ngIf="canParenMaren === true">
-            Paren Maren!
-          </button>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div id="roll" class="col roll-button" (click)="newPlayer()" *ngIf="startGamePressed === false">
+              <button type="button" class="btn btn-light button-70">Add Player</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center pt-3" *ngFor="let player of gameBoard.players">
+          <div class="col">
+            <div class="row">
+              <div class="col-2">
+                <p>{{ player.name ? player.name : 'anonymous' }}</p>
+              </div>
+              <div class="col-10">
+                <!-- <h4>{{ player.score ? player.score : ' ' }}</h4> -->
+                <p>
+                  <ngb-progressbar
+                    type="{{ player.score < 78 ? 'success' : 'info' }}"
+                    [value]="player.score"
+                    [max]="365"
+                    >{{ player.score }}</ngb-progressbar
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-
+  <!-- 
   <svg
     id="clouds"
     alt="Gray Clouds Background"
@@ -101,14 +120,5 @@
       transform="translate(142.69 -634.312)"
       fill="#eee"
     />
-  </svg>
-
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-  <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+  </svg> -->
 </div>
-<div class="container"></div>
