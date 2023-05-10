@@ -23,28 +23,38 @@ export class AppComponent {
     lastTurn: 1
   };
   turnDices = [];
-  currentPlayer;
+  currentPlayerScore;
+  currentPlayer: string;
   diceAudio;
   blackDice = 1;
+  winner;
 
   startGame() {
     this.startGamePressed = true;
+    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn].name;
   }
 
   switchTurn() {
     this.canRoll = true;
     this.canParenMaren = false;
-    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn].score;
+    this.currentPlayerScore = this.gameBoard.players[this.gameBoard.currentTurn].score;
     let total: number = 0;
-    let currentScore: number = this.currentPlayer;
+    let currentScore: number = this.currentPlayerScore;
     this.turnDices.forEach((item) => {
       total += item.rollResult;
     });
     let multipliedScore: number = total * this.blackDice;
+
     if (currentScore === undefined) {
       this.gameBoard.players[this.gameBoard.currentTurn].score = multipliedScore;
     } else {
       this.gameBoard.players[this.gameBoard.currentTurn].score = currentScore + multipliedScore;
+    }
+    if (this.gameBoard.players[this.gameBoard.currentTurn].score >= 365) {
+      console.log(this.currentPlayer + 'Ganador!');
+      this.canRoll = false;
+      this.winner = this.currentPlayer;
+      alert(this.winner + 'is the winner!');
     }
 
     localStorage.setItem('Game', JSON.stringify(this.gameBoard));
@@ -52,6 +62,7 @@ export class AppComponent {
     this.blackDiceRolled = false;
     this.gameBoard.currentTurn = (this.gameBoard.currentTurn + 1) % this.gameBoard.players.length;
     this.gameBoard.lastTurn = (this.gameBoard.lastTurn + 1) % this.gameBoard.players.length;
+    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn].name;
   }
 
   playSound() {
@@ -64,7 +75,8 @@ export class AppComponent {
     this.blackDice = 1;
     this.blackDiceRolled = false;
     this.playSound();
-    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn];
+    this.currentPlayer = this.gameBoard.players[this.gameBoard.currentTurn].name;
+
     if (this.turnDices.length === 4 || this.gameBoard.players.length === 0) {
       return;
     } else {
