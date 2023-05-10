@@ -108,9 +108,13 @@ export class AppComponent {
 
   newPlayer() {
     let newPlayer: Player = new Player();
-    newPlayer.name = prompt('');
-    this.gameBoard.players.push(newPlayer);
-    newPlayer.id = this.gameBoard.players.length;
-    localStorage.setItem('Game', JSON.stringify(this.gameBoard));
+    newPlayer.name = prompt();
+    if (newPlayer.name === '' || newPlayer.name === null || newPlayer.name === 'null') {
+      return;
+    } else {
+      this.gameBoard.players.push(newPlayer);
+      newPlayer.id = this.gameBoard.players.length;
+      localStorage.setItem('Game', JSON.stringify(this.gameBoard));
+    }
   }
 }
