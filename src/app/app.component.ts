@@ -54,7 +54,7 @@ export class AppComponent {
       console.log(this.currentPlayer + 'Ganador!');
       this.canRoll = false;
       this.winner = this.currentPlayer;
-      alert(this.winner + 'is the winner!');
+      alert(this.winner + ' is the winner!');
     }
 
     localStorage.setItem('Game', JSON.stringify(this.gameBoard));
