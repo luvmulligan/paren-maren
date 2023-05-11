@@ -88,7 +88,7 @@ export class AppComponent {
         this.canParenMaren = true;
         this.canRoll = true;
       }
-      if (rollDice < 4 || this.turnDices.length === 4) {
+      if (rollDice < 4 || this.turnDices.length > 4) {
         this.canParenMaren = false;
         this.canRoll = false;
         setTimeout(() => {
