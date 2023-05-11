@@ -11,8 +11,8 @@
   >
     Toggle
   </button> -->
-  <div>
-    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+  <div class="row justify-content-center">
+    <div class="col-4" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" style="width: 380px">
       <h4 style="text-align: center">Reglas:</h4>
       <p>El primer jugador tira el dado con el botón Roll!</p>
       <p>Si el resultado del dado es 1, 2 o 3, termina el turno.</p>
