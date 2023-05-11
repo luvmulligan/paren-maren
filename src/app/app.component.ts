@@ -12,6 +12,7 @@ export class Player {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  isCollapsed = true;
   title = 'Paren Maren';
   canRoll: boolean = true;
   canParenMaren: boolean = false;
