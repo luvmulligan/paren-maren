@@ -24,7 +24,6 @@
     </div>
   </div>
   <div class="row text-center" class="roll-height">
-    <!-- <div class="col-2"></div> -->
     <div class="col text-center">
       <div class="row justify-content-center pb-3 pt-3 mt-5">
         <div class="col-12">
@@ -34,16 +33,18 @@
             </button>
           </div>
         </div>
-        <div class="col col-3 text-center" *ngFor="let dice of turnDices">
-          <span>
-            <div class="dice">
-              <img *ngIf="dice.rollResult === 1" src="assets/dice1.png" />
-              <img *ngIf="dice.rollResult === 2" src="assets/dice2.png" />
-              <img *ngIf="dice.rollResult === 3" src="assets/dice3.png" />
-              <img *ngIf="dice.rollResult === 4" src="assets/dice4.png" />
-              <img *ngIf="dice.rollResult === 5" src="assets/dice5.png" />
-              <img *ngIf="dice.rollResult === 6" src="assets/dice6.png" /></div
-          ></span>
+        <div class="row justify-content-center">
+          <div class="col col-3 text-center" *ngFor="let dice of turnDices">
+            <span>
+              <div class="dice" style="margin-left: -10px">
+                <img *ngIf="dice.rollResult === 1" src="assets/dice1.png" />
+                <img *ngIf="dice.rollResult === 2" src="assets/dice2.png" />
+                <img *ngIf="dice.rollResult === 3" src="assets/dice3.png" />
+                <img *ngIf="dice.rollResult === 4" src="assets/dice4.png" />
+                <img *ngIf="dice.rollResult === 5" src="assets/dice5.png" />
+                <img *ngIf="dice.rollResult === 6" src="assets/dice6.png" /></div
+            ></span>
+          </div>
         </div>
       </div>
 
@@ -64,7 +65,7 @@
   </div>
   <div class="row">
     <div class="col-12 text-center">
-      <div class="row" *ngIf="startGamePressed === true">
+      <!-- <div class="row" *ngIf="startGamePressed === true">
         <div class="col text-right" style="padding-left: 6.5rem">
           <div id="roll" class="roll-button">
             <button type="button" class="btn btn-light button-70" (click)="rollDice()" [disabled]="canRoll === false">
@@ -84,15 +85,15 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
-        <div class="col-12" style="padding-bottom: 4rem">
-          <div class="row">
+        <!-- <div class="col-12" style="padding-bottom: 4rem">
+          <div class="row" style="height: 49px">
             <div id="roll" class="col roll-button" *ngIf="startGamePressed === false">
               <button type="button" class="btn btn-light button-70" (click)="newPlayer()">Add Player</button>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row text-center ml-1" *ngFor="let player of gameBoard.players">
           <div class="col" style="margin-bottom: 10px">
@@ -112,6 +113,36 @@
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div id="roll" class="col roll-button" *ngIf="startGamePressed === false">
+              <button type="button" class="btn btn-light button-70" (click)="newPlayer()">Add Player</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="startGamePressed === true">
+        <div class="col-12 pt-2">
+          <div id="roll" class="roll-button">
+            <button type="button" class="btn btn-light button-70" (click)="rollDice()" [disabled]="canRoll === false">
+              Roll!
+            </button>
+          </div>
+        </div>
+        <div class="col-12 pt-3">
+          <div id="roll" class="roll-button">
+            <button
+              type="button"
+              class="btn btn-light btn-circle btn-xl button-62"
+              (click)="rollBlackDice()"
+              *ngIf="canParenMaren === true"
+            >
+              Paren Maren!
+            </button>
           </div>
         </div>
       </div>
