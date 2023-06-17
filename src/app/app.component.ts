@@ -29,6 +29,8 @@ export class AppComponent {
   diceAudio;
   blackDice = 1;
   winner;
+  rules =
+    'El Paren Maren es un juego de dados multijugador. Los juadores se turnan para lanzar 4 dados de a uno por vez. Si el resultado es 3 o inferior, termina el turno. Si el resultado es 4 o superior, el jugador puede seguir seguir tirando dados blancos o presionar el botón Paren Maren y tirar el dado negro. Este multiplica los puntos obtenidos con su resultado y da fin al turno. El primer jugador en acumular 365 puntos es el ganador.';
 
   startGame() {
     this.startGamePressed = true;

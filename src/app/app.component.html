@@ -11,29 +11,23 @@
   >
     Toggle
   </button> -->
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="cursor: pointer">
     <div class="col-lg-4 col-md-12" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" style="width: 380px">
       <h4 style="text-align: center">Reglas:</h4>
-      <p>El primer jugador tira el dado con el botón Roll!</p>
-      <p>Si el resultado del dado es 1, 2 o 3, termina el turno.</p>
-      <p>
-        Si el resultado es 4, 5 o 6, el jugador continúa su turno. Puede seguir tirando dados o hacer Paren Maren y
-        tirar el dado multiplicador.
-      </p>
-      <p>El primer jugador en llegar a 365 puntos, gana.</p>
+      <p>{{ rules }}</p>
     </div>
   </div>
   <div class="row text-center" class="roll-height">
     <div class="col text-center">
       <div class="row justify-content-center pb-3 pt-3 mt-5">
         <div class="col-12">
-          <div id="roll" class="roll-button" *ngIf="gameBoard.players.length !== 0 && startGamePressed === false">
+          <!-- <div id="roll" class="roll-button" *ngIf="gameBoard.players.length !== 0 && startGamePressed === false">
             <button type="button" class="btn btn-light button-71" (click)="startGame()" [disabled]="canRoll === false">
               Start Game
             </button>
-          </div>
+          </div> -->
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" (click)="rollDice()">
           <div class="col col-3 text-center" *ngFor="let dice of turnDices">
             <span>
               <div class="dice" style="margin-left: -10px">
@@ -118,9 +112,23 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <div class="row">
-            <div id="roll" class="col roll-button" *ngIf="startGamePressed === false">
+          <div class="row justify-content-center">
+            <div id="roll" class="col-2 roll-button" *ngIf="startGamePressed === false">
               <button type="button" class="btn btn-light button-70" (click)="newPlayer()">Add Player</button>
+            </div>
+            <div
+              id="roll"
+              class="col-2 roll-button"
+              *ngIf="gameBoard.players.length !== 0 && startGamePressed === false"
+            >
+              <button
+                type="button"
+                class="btn btn-light button-71"
+                (click)="startGame()"
+                [disabled]="canRoll === false"
+              >
+                Start Game
+              </button>
             </div>
           </div>
         </div>
